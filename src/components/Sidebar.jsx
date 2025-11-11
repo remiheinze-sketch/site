@@ -1,6 +1,6 @@
 import React from "react";
 
-const Sidebar = ({ activeTab, setActiveTab }) => {
+const Sidebar = ({ activeTab, setActiveTab, isMenuOpen, setIsMenuOpen }) => {
   const tabs = [
     { id: "notes", label: "🗒️ Notes" },
     { id: "agenda", label: "📅 Agenda" },
@@ -13,7 +13,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
   ];
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${isMenuOpen ? "open" : ""}`}>
       <h2 className="sidebar__title">OrganiHub</h2>
       <nav>
         <ul className="sidebar__list">
@@ -23,7 +23,10 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                 className={`sidebar__btn ${
                   activeTab === tab.id ? "active" : ""
                 }`}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => {
+                  setActiveTab(tab.id);
+                  setIsMenuOpen(false);
+                }}
               >
                 {tab.label}
               </button>
