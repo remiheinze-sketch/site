@@ -3,6 +3,7 @@ import Sidebar from "./components/Sidebar";
 
 function App() {
   const [activeTab, setActiveTab] = useState("notes");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const renderContent = () => {
     switch (activeTab) {
@@ -29,7 +30,23 @@ function App() {
 
   return (
     <div className="app-layout">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      {/* Bouton menu pour mobile */}
+      <button
+        className="menu-toggle"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        ☰
+      </button>
+
+      {/* Sidebar */}
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+      />
+
+      {/* Contenu principal */}
       <main className="main-content">{renderContent()}</main>
     </div>
   );
